@@ -1,17 +1,59 @@
-// Update this page (the content is just a fallback if you fail and example)
-// Use chakra-ui
-import { Container, Text, VStack } from "@chakra-ui/react";
+import { Box, Container, Flex, Heading, HStack, Image, Link, SimpleGrid, Text, VStack } from "@chakra-ui/react";
+import { Link as RouterLink } from "react-router-dom";
 
-// Example of using react-icons
-// import { FaRocket } from "react-icons/fa";
-// <IconButton aria-label="Add" icon={<FaRocket />} size="lg" />; // IconButton would also have to be imported from chakra
+const products = [
+  {
+    id: 1,
+    name: "Smartphone",
+    description: "Latest model with advanced features",
+    price: "$699",
+    image: "path/to/smartphone.jpg",
+  },
+  {
+    id: 2,
+    name: "Laptop",
+    description: "High performance laptop for professionals",
+    price: "$999",
+    image: "path/to/laptop.jpg",
+  },
+  {
+    id: 3,
+    name: "Headphones",
+    description: "Noise-cancelling over-ear headphones",
+    price: "$199",
+    image: "path/to/headphones.jpg",
+  },
+];
 
 const Index = () => {
   return (
-    <Container centerContent maxW="container.md" height="100vh" display="flex" flexDirection="column" justifyContent="center" alignItems="center">
-      <VStack spacing={4}>
-        <Text fontSize="2xl">Your Blank Canvas</Text>
-        <Text>Chat with the agent to start making edits.</Text>
+    <Container maxW="container.xl" p={4}>
+      <Flex as="nav" bg="gray.800" color="white" p={4} justifyContent="space-between" alignItems="center">
+        <Heading size="md">ElectroShop</Heading>
+        <HStack spacing={4}>
+          <Link as={RouterLink} to="/">Home</Link>
+          <Link as={RouterLink} to="/products">Products</Link>
+          <Link as={RouterLink} to="/about">About Us</Link>
+          <Link as={RouterLink} to="/contact">Contact Us</Link>
+        </HStack>
+      </Flex>
+
+      <VStack spacing={8} mt={8}>
+        <Heading as="h1" size="xl">Welcome to ElectroShop</Heading>
+        <Text fontSize="lg">Your one-stop shop for the latest electronics</Text>
+
+        <SimpleGrid columns={{ base: 1, md: 3 }} spacing={8} w="full">
+          {products.map((product) => (
+            <Box key={product.id} borderWidth="1px" borderRadius="lg" overflow="hidden">
+              <Image src={product.image} alt={product.name} />
+              <Box p={4}>
+                <Heading as="h3" size="md">{product.name}</Heading>
+                <Text mt={2}>{product.description}</Text>
+                <Text mt={2} fontWeight="bold">{product.price}</Text>
+              </Box>
+            </Box>
+          ))}
+        </SimpleGrid>
       </VStack>
     </Container>
   );
